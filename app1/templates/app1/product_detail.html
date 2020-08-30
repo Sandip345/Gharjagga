@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+<h1>products</h1>
+<table class="table">
+<tr>
+<th>Name</th>
+<td>{{ object.name }}</td>
+</tr>
+<tr>
+<th>Cover images</th>
+<td>
+{% for image in object.productimage_set.all %}
+<img class="img-thumbnail" alt="Responsive image" src="{{ image.thumbnail.url }}" alt="cover"/>
+{% endfor %}
+</td>
+</tr>
+<tr>
+<th>Price</th>
+<td>Rs: {{ object.price }}</td>
+</tr>
+<tr>
+<th>Available</th>
+<td>{{ object.available|yesno|capfirst }}</td>
+</tr>
+<tr>
+<th>Updated</th>
+<td>{{ object.date_updated|date:"F Y" }}</td>
+</tr>
+</table>
+<h6>Description</h6>
+<p>{{ object.description|linebreaks }}</p>
+<a href="#">View Owner Info</a>
+<hr>
+
+<div id="wrapper-9cd199b9cc5410cd3b1ad21cab2e54d3">
+		<div id="map-9cd199b9cc5410cd3b1ad21cab2e54d3"></div><script>(function () {
+        var setting = {"height":260,"width":343,"zoom":16,"queryString":"Kathmandu, Nepal","place_id":"ChIJv6p7MIoZ6zkR6rGN8Rt8E7U","satellite":false,"centerCoord":[27.708968045698413,85.32613279999998],"cid":"0xb5137c1bf18db1ea","lang":"en","cityUrl":"/nepal/kathmandu-5536","cityAnchorText":"Map of Kathmandu, Lalitpur, Nepal","id":"map-9cd199b9cc5410cd3b1ad21cab2e54d3","embed_id":"245887"};
+        var d = document;
+        var s = d.createElement('script');
+        s.src = 'https://1map.com/js/script-for-user.js?embed_id=245887';
+        s.async = true;
+        s.onload = function (e) {
+          window.OneMap.initMap(setting)
+        };
+        var to = d.getElementsByTagName('script')[0];
+        to.parentNode.insertBefore(s, to);
+      })();</script><a href="https://1map.com/map-embed">1 Map</a></div>
+      
+</div>
+{% endblock %}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'app1/css/offcanvas.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app1/css/floating-button.css' %}">
+    {% block heading %}
+    {% endblock %}
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title></title>
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <a class="navbar-brand mr-auto mr-lg-0" href="#">Online Karobar</a>
+  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      {% if request.user.is_superuser or request.user.is_staff %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url "admin:index" %}">Admin</a>
+      </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Your Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'app1:sellproducts' %}">Sell Products</a>
+      </li>
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'app1:login' %}">Log Out</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'app1:login' %}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'app1:signup' %}">Signup</a>
+      </li>
+      {% endif %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Update Information</a>
+          <a class="dropdown-item" href="#">Change Password</a>
+          <a class="dropdown-item" href="#"></a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<div class="nav-scroller bg-white shadow-sm">
+  <nav class="nav nav-underline">
+    <a class="nav-link active" href="{% url 'app1:home' %}">All products</a>
+    <a class="nav-link" href="{% url "app1:productlist" 'house-rent' %}">House rent</a>
+    <a class="nav-link" href="{% url "app1:productlist" 'house-sell' %}">House sell</a>
+    <a class="nav-link" href="{% url "app1:productlist" 'land-sell' %}">Land sell</a>
+    <a class="nav-link" href="{% url "app1:productlist" 'shop-sell' %}">Shop Sell</a>
+    <a class="nav-link" href="{% url "app1:productlist" 'apartment-sell' %}">Apartment sell</a>
+    <a class="nav-link" href="{% url "app1:productlist" 'second-hand-items' %}">Second hand items</a>
+
+  </nav>
+</div>
+<script type="text/javascript" src="{% static 'app1/js/offcanvas.js' %}"></script>
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+
+    {% block body %}
+    {% endblock %}
+    <div class="container">
+      
+      
+<a href="#" class="float">
+<i class="fa fa-plus my-float"></i>
+</a>
+
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+      <div class="col-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="text-muted" href="{% url 'app1:contactus' %}">Contact us</a></li>
+            <li><a class="text-muted" href="#">Privacy</a></li>
+            <li><a class="text-muted" href="#">Terms</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Follow us</h5>
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="https://facebook.com/">Facebook</a></li>
+              <li><a class="text-muted" href="https://instagram.com/">Instagram</a></li>
+              <li><a class="text-muted" href="https://twitter.com/">Twitter</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
